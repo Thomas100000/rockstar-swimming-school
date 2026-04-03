@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rockstar Swimming School{% endblock %}</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+    
+    <!-- CDNs for 3D aesthetics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+    <style>
+        #bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at center, transparent 0%, rgba(2, 13, 27, 0.9) 100%),
+                url("{% static 'img/rockstar_kainakary_bg.png' %}") no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            filter: brightness(0.9) contrast(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="bg-image"></div>
+    <div id="canvas-container"></div>
+    
+    <nav class="glass-nav">
+        <div class="logo">
+            <a href="{% url 'home' %}">Rockstar<span>Swim</span></a>
+        </div>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% if user.is_staff %}
+                <li><a href="{% url 'dashboard' %}" style="color: var(--primary);">Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'coaches' %}">Coaches</a></li>
+        </ul>
+    </nav>
+
+    <main class="content-wrapper">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="msg {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="glass-footer">
+        <p>&copy; 2026 Rockstar Swimming School. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

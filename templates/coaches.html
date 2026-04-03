@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Our Coaches - Rockstar Swimming{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="glass-panel">
+        <h1 class="stunning-text small">Elite Coaches</h1>
+        <div class="coaches-grid">
+            {% for coach in coaches %}
+            <div class="coach-card glass-panel" data-tilt>
+                <h3>{{ coach.name }}</h3>
+                <p><strong>{{ coach.specialty }}</strong></p>
+                <p class="text-muted">{{ coach.experience }} experience</p>
+                {% if coach.bio %}
+                    <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">{{ coach.bio }}</p>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p class="text-center">Our elite coaches are preparing for the next session. Stay tuned!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Enquiry Dashboard - Rockstar Swimming{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="container" style="width: 100%; max-width: 1200px;">
+        <h1 class="stunning-text small text-center">Enquiry Dashboard</h1>
+        <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">Recent student inquiries from the homepage.</p>
+        
+        <div class="glass-panel" style="max-width: 100%; padding: 0; overflow-x: auto; border-radius: 20px;">
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enquiry in enquiries %}
+                    <tr>
+                        <td>{{ enquiry.created_at|date:"M d, Y" }}</td>
+                        <td style="color: var(--primary); font-weight: 600;">{{ enquiry.name }}</td>
+                        <td>{{ enquiry.email }}</td>
+                        <td>{{ enquiry.mobile_number }}</td>
+                        <td><span class="status-badge">New</span></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">No enquiries found yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

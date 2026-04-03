@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Rockstar Access - Login{% endblock %}
+
+{% block content %}
+<section class="page-section login-page">
+    <div class="login-card glass-panel" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.1">
+        <div class="login-header">
+            <h1 class="stunning-text small">Rockstar<span>Access</span></h1>
+            <p>Enter your elite credentials to manage the school.</p>
+        </div>
+
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="form-error">
+                    <p>Invalid username or password. Please try again.</p>
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <input type="text" name="username" id="id_username" placeholder="Rockstar ID" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" id="id_password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="glow-btn">Initialize Portal</button>
+            
+            <div class="login-footer">
+                <a href="{% url 'home' %}">← Return to Public Site</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

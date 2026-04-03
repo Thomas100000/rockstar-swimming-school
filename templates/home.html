@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Rockstar Swimming School{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="stunning-text" data-tilt data-tilt-max="10" data-tilt-speed="400">Dive Into <br><span>Excellence</span></h1>
+        <p class="hero-subtitle">Experience the ultimate swimming training with Rockstar coaches.</p>
+        <div class="hero-badges">
+            <span class="badge" data-tilt data-tilt-scale="1.1">Professional</span>
+            <span class="badge" data-tilt data-tilt-scale="1.1">Modern</span>
+            <span class="badge" data-tilt data-tilt-scale="1.1">Safe</span>
+        </div>
+    </div>
+
+    <!-- Added data-tilt to make it a 3D interactive card -->
+    <div class="form-wrapper" id="enquiry-card" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare="true" data-tilt-max-glare="0.5">
+        <div class="form-glass">
+            <h2>Start Your Journey</h2>
+            <p>Join the Rockstar team today.</p>
+            <form method="post" action="{% url 'home' %}" id="enquiryForm" novalidate>
+                {% csrf_token %}
+                <div class="input-group">
+                    {{ form.name }}
+                    <label for="id_name">Name</label>
+                    <span class="error-msg" id="nameError"></span>
+                </div>
+                <div class="input-group">
+                    {{ form.email }}
+                    <label for="id_email">Email</label>
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+                <div class="input-group">
+                    {{ form.mobile_number }}
+                    <label for="id_mobile_number">Mobile Number</label>
+                    <span class="error-msg" id="mobileError"></span>
+                </div>
+                <!-- Automatically render any non-field errors -->
+                {% if form.errors %}
+                    <div class="form-errors">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p class="error-text">{{ field.label }}: {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p class="error-text">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <button type="submit" class="glow-btn">Enquire Now</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

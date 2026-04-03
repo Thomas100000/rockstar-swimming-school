@@ -1,0 +1,28 @@
+# Rockstar Swimming .gitignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Secrets & Local Configuration
+.env
+db.sqlite3
+
+# Static & Media (generated/collected)
+staticfiles/
+media/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

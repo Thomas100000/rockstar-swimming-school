@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Gallery - Rockstar Swimming{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container" style="width: 100%; max-width: 1200px;">
+        <h1 class="stunning-text small text-center">Experience Rockstar</h1>
+        <p class="text-center" style="color: var(--text-muted); margin-bottom: 3rem;">Dive into our world-class facilities and expert training sessions.</p>
+        
+        <div class="gallery-grid">
+            {% for img in images %}
+            <div class="gallery-item" data-tilt data-tilt-scale="1.05">
+                <img src="{{ img.image_url }}" alt="{{ img.title }}">
+                <div class="gallery-caption">
+                    <h3>{{ img.title }}</h3>
+                    <p>{{ img.category }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default placeholders if no images are in the database yet -->
+            <div class="gallery-item" data-tilt data-tilt-scale="1.05">
+                <img src="{% static 'img/pool_view.png' %}" alt="Luxury Pool Area">
+                <div class="gallery-caption">
+                    <h3>Elite Facilities</h3>
+                    <p>Experience our professional-grade pool.</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-tilt data-tilt-scale="1.05">
+                <img src="{% static 'img/training_action.png' %}" alt="Training Session">
+                <div class="gallery-caption">
+                    <h3>Professional Training</h3>
+                    <p>Expert coaching for all skill levels.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
