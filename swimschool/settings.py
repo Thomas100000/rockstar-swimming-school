@@ -30,7 +30,12 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-e-9@^7kgc#3*l)el@8$x0%6%n^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'rockstar-swimming-school.onrender.com,localhost,127.0.0.1').split(',')
+
+# Add Render external hostname if it exists
+RENDER_EXTERNAL_HOSTNAME = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
@@ -43,6 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://rockstar-swimming-school.onrender.com',
 ]
 
 MIDDLEWARE = [
